@@ -13,15 +13,20 @@ public class Mixer {
         List<T> list1 = first.collect(Collectors.toList());
         List<T> list2 = second.collect(Collectors.toList());
         int min = Math.min(list1.size(), list2.size());
-        list2.addAll(list1);
-        Collections.shuffle(list2);
-        return list2.stream().limit(min);
+        List<T> result = new ArrayList<T>();
+        for (int i = 0; i < min; i++) {
+            result.add(list1.get(i));
+            result.add(list2.get(i));
+
+        }
+
+        return result.stream().limit(min * 2);
     }
 }
 
 class MixerTest {
     public static void main(String[] args) {
-        Stream<Integer> stream1 = Stream.of(1,2, 3);
+        Stream<Integer> stream1 = Stream.of(1, 2, 3, 7);
         Stream<Integer> stream2 = Stream.of(7, 8, 9, 10, 11, 12);
         List<Integer> collect = Mixer.zip(stream1, stream2).collect(Collectors.toList());
         System.out.println(collect);
