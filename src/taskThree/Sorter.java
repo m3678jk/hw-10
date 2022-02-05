@@ -18,12 +18,14 @@ public class Sorter {
         return list;
     }
 
-    public String sorter(){
+  public String sorter(){
         String result =  getList().stream()
                 .map(element ->  (List<String>) new ArrayList<String>(Arrays.asList(element
                         .replaceAll("\\D+", " ").split(" "))))
                 .flatMap(Collection::stream)
+                .mapToInt(it-> Integer.parseInt(it))
                 .sorted()
+                .mapToObj(x-> x + "")
                 .collect(Collectors.joining(", ", "\"", "\""));
         return result;
     }
