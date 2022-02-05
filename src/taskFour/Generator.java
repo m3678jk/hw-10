@@ -16,9 +16,11 @@ public class Generator {
 class TestGenerator{
     public static void main(String[] args) {
         Generator gen = new Generator();
-        List<Long> list = gen.generator(0L, 11L, (long)Math.pow(2,48))
+        long l = gen.generator(0L, 11L, (long)Math.pow(2,48))
                 .limit(10)
-                .collect(Collectors.toList());
-        System.out.println(list);
+                .peek(System.out::println)
+                .count();
+
     }
 }
+
